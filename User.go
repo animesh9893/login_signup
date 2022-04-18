@@ -18,7 +18,9 @@ type User struct {
 	Object_token string `json:"object_token"`
 }
 
-
+func Testing2() string {
+	return "testing 2"
+}
 func EncryptPassword(password string) (string,error) {
 	bytes,err := bcrypt.GenerateFromPassword([]byte(password),14);
 	return string(bytes),err;
