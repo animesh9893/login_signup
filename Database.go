@@ -16,6 +16,10 @@ type Database struct {
 	DNS_URL		 string  `json:"dns_url"`
 }
 
+func Testing() string {
+	return "hello Animesh !!!"
+}
+
 func DNSstring(url,user,password,database string) string {
 	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s",user,password,url,database);
 	return dns;
