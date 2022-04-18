@@ -44,7 +44,13 @@ func ConnectDB(server,url,user,password,database string) *Database{
 	return obj;
 }
 
-
+func ConnectDB() *Database{
+	obj := CreateDatabaseObject(SERVER_URL,SERVER_USER_NAME,SERVER_PASSWORD,SERVER_DATABASE);
+	if(SERVER == "mysql"){
+		obj.DB,obj.ERROR = sql.Open(server,obj.DNS_URL);
+	}
+	return obj;
+}
 
 
 
