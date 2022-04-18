@@ -44,6 +44,8 @@ func ConnectDB(server,url,user,password,database string) *Database{
 	return obj;
 }
 
+
+/*
 func ConnectDB() *Database{
 	obj := CreateDatabaseObject(SERVER_URL,SERVER_USER_NAME,SERVER_PASSWORD,SERVER_DATABASE);
 	if(SERVER == "mysql"){
@@ -51,6 +53,6 @@ func ConnectDB() *Database{
 	}
 	return obj;
 }
-
+*/
 
 
