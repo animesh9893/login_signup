@@ -37,7 +37,7 @@ func ConnectDB(server,url,user,password,database string) *Database{
 	if(server == "mysql"){
 		obj.DB,obj.ERROR = sql.Open(server,obj.DNS_URL);
 	}
-	return &obj;
+	return obj;
 }
 
 
