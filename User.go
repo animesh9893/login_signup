@@ -24,7 +24,7 @@ func EncryptPassword(password string) (string,error) {
 	return string(bytes),err;
 }
 
-func CheckEqualPassword(password,hashPassword string) bool {
+func CheckEqualPassword(password,hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password));
 	return err==nil;
 }
