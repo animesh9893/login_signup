@@ -44,15 +44,44 @@ func ConnectDB(server,url,user,password,database string) *Database{
 	return obj;
 }
 
-
-/*
-func ConnectDB() *Database{
-	obj := CreateDatabaseObject(SERVER_URL,SERVER_USER_NAME,SERVER_PASSWORD,SERVER_DATABASE);
-	if(SERVER == "mysql"){
-		obj.DB,obj.ERROR = sql.Open(server,obj.DNS_URL);
-	}
-	return obj;
+func (db *Database) CheckIfTableExist(name string) bool {
+	query := "SELECT * FROM "+NAME+" ; "
+	_,err := db.DB.Query(query);
+	return err==nil; 
 }
-*/
+
+func (db *Database) CreateUserTable() error {
+	query := "CREATE TABLE "+TABLE_NAME+`(
+		user_id int NOT NULL AUTO_INCREMENT,
+		name varchar(255) NOT NULL,
+		password varchar(255) NOT NULL,
+		organization_name text,
+		email text NOT NULL,
+		auth_token text NOT NULL,
+		mobile varchar(14),
+		note text,
+		pin int,
+		object_token string,
+    		PRIMARY KEY (user_id),
+		CONSTRAINT UC_User UNIQUE (email,auth_token)
+	)`;
+	fmt.Println(query)
+	return nil;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

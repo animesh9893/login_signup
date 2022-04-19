@@ -7,6 +7,7 @@ import (
 )
 // This structure is used to store user details
 type User struct {
+	User_id int `json:"user_id"`
 	Name string `json:"user_name"`
 	Password string `json:"password"`
 	Organization string `json:"organization_name"`
