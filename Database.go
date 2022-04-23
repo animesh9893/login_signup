@@ -45,28 +45,26 @@ func ConnectDB(server,url,user,password,database string) *Database{
 }
 
 func (db *Database) CheckIfTableExist(name string) bool {
-	query := "SELECT * FROM "+name+" ; "
+	query := "SELECT * FROM "+NAME+" ; "
 	_,err := db.DB.Query(query);
 	return err==nil;
 }
 
 func (db *Database) CreateUserTable() error {
-	query := "CREATE TABLE "+TABLE_NAME+`(
-		user_id int NOT NULL AUTO_INCREMENT,
-		name varchar(255) NOT NULL,
-		password varchar(255) NOT NULL,
+	query := "CREATE TABLE IF NOT EXIST "+TABLE_NAME+`(
+		user_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		user_name text NOT NULL,
+		password text NOT NULL,
 		organization_name text,
-		email text NOT NULL,
+		email text NOT NULL UNIQUE,
 		auth_token text NOT NULL,
-		mobile varchar(14),
+		mobile text,
 		note text,
-		pin int,
-		object_token string,
-    		PRIMARY KEY (user_id),
-		CONSTRAINT UC_User UNIQUE (email,auth_token)
-	)`;
-	fmt.Println(query)
-	return nil;
+		pin text,
+		object_token text
+	)`
+	_,err := db.DB.Query(query)
+	return err;
 }
 
 
