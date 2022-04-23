@@ -52,7 +52,7 @@ func (db *Database) CheckIfTableExist(name string) bool {
 
 func (db *Database) CreateUserTable() error {
 	query := "CREATE TABLE IF NOT EXIST "+TABLE_NAME+`(
-		user_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		user_id INT NOT NULL AUTO_INCREMENT,
 		user_name text NOT NULL,
 		password text NOT NULL,
 		organization_name text,
@@ -61,7 +61,8 @@ func (db *Database) CreateUserTable() error {
 		mobile text,
 		note text,
 		pin text,
-		object_token text
+		object_token text,
+		PRIMARY KEY (user_id)
 	)`
 	_,err := db.DB.Query(query)
 	return err;
