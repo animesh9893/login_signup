@@ -45,9 +45,9 @@ func ConnectDB(server,url,user,password,database string) *Database{
 }
 
 func (db *Database) CheckIfTableExist(name string) bool {
-	query := "SELECT * FROM "+name+" ; "
+	query := "SELECT * FROM "+NAME+" ; "
 	_,err := db.DB.Query(query);
-	return err==nil;
+	return err==nil; 
 }
 
 func (db *Database) CreateUserTable() error {
@@ -67,10 +67,6 @@ func (db *Database) CreateUserTable() error {
 	_,err := db.DB.Query(query)
 	return err;
 }
-
-
-
-
 
 
 
