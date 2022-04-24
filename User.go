@@ -4,6 +4,7 @@ import (
         "encoding/hex"
         "golang.org/x/crypto/bcrypt"
         "math/rand"
+	"encoding/json"
 )
 // This structure is used to store user details
 type User struct {
@@ -40,3 +41,17 @@ func GenerateToken(length int) string {
     }
     return hex.EncodeToString(b)
 }
+
+func CreateUser(data string ) {
+	var obj User;
+	json.Unmarshal([]byte(data),&obj)
+	fmt.Println(obj)
+}
+
+
+
+
+
+
+
+
