@@ -30,7 +30,7 @@ func EncryptPassword(password string) (string,error) {
 }
 
 func CheckEqualPassword(password,hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password));
+err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password));
 	return err==nil;
 }
 
@@ -46,6 +46,8 @@ func GenerateToken(length int) string {
 func CreateUser(data string ) {
 	var obj User;
 	json.Unmarshal([]byte(data),&obj)
+	obj.Auth_token = GenerateToken(60);
+	obj.Object_token = GenerateToken(60);
 	fmt.Println(obj)
 }
 
