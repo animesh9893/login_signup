@@ -21,16 +21,20 @@ type User struct {
 	Object_token string `json:"object_token"`
 }
 
-func Testing2() string {
-	return "testing 2"
+func Println(x interface{}){
+	if (DEBUGGER) {
+		fmt.Println(x);
+	}
 }
 func EncryptPassword(password string) (string,error) {
 	bytes,err := bcrypt.GenerateFromPassword([]byte(password),14);
+	Println("Encrypting password")
 	return string(bytes),err;
 }
 
 func CheckEqualPassword(password,hash string) bool {
-err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password));
+	err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password));
+	Println("Checking Equal Password")
 	return err==nil;
 }
 
@@ -40,15 +44,20 @@ func GenerateToken(length int) string {
     if _, err := rand.Read(b); err != nil {
         return ""
     }
+	Println("Generating Token")
     return hex.EncodeToString(b)
 }
 
-func CreateUser(data string ) {
+func (db *Database )CreateUser(data string ) error {
 	var obj User;
+	Println("Create User function called")
 	json.Unmarshal([]byte(data),&obj)
 	obj.Auth_token = GenerateToken(60);
 	obj.Object_token = GenerateToken(60);
-	fmt.Println(obj)
+	Println("Create user sql function called")
+	err := db.CreateUserSQL(obj);
+	Println("Function calling done")
+	return err
 }
 
 

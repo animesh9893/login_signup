@@ -16,12 +16,10 @@ type Database struct {
 	DNS_URL		 string  `json:"dns_url"`
 }
 
-func Testing() string {
-	return "hello Animesh !!!"
-}
 
 func DNSstring(url,user,password,database string) string {
 	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s",user,password,url,database);
+	Println("DNS string function called")
 	return dns;
 }
 
@@ -32,6 +30,8 @@ func CreateDatabaseObject(server,user,password,database string) *Database{
 	obj.SERVER_PASSWORD  = password;
 	obj.DATABASE_NAME    = database;
 	obj.DNS_URL	     = DNSstring(server,user,password,database);
+	Println("Create Database object fucntion called")
+	Println(obj)
 	return &obj;
 }
 
@@ -41,6 +41,8 @@ func ConnectDB(server,url,user,password,database string) *Database{
 	if(server == "mysql"){
 		obj.DB,obj.ERROR = sql.Open(server,obj.DNS_URL);
 	}
+	Println("Connect DB is called")
+	Println(obj)
 	return obj;
 }
 
@@ -60,10 +62,28 @@ func (db *Database) CreateUserTable() error {
 		PRIMARY KEY (user_id)
 	)`
 	_,err := db.DB.Query(query)
+	Println("Create user table function called\t Error is -- ")
+	Println(err)
 	return err;
 }
 
-
+func (db *Database) CreateUserSQL(obj User) error {
+	query := `INSERT INTO `+TABLE_NAME+`(
+		user_id,user_name,password,organization_name,email,auth_token,mobile,note,pin,object_token)`+` VALUES (`
+	obj.User_id+", "
+	obj.Name+", "
+	obj.Password+", "
+	obj.Organization+", "
+	obj.Email+", "
+	obj.Auth_token+", "
+	obj.Mobile+", "
+	obj.Note+", "
+	obj.Pin+", "
+	obj.Object_token+");"
+	Println("")
+	_,err := db.DB.Query(query)
+	return err;
+}
 
 
 
