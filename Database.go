@@ -70,16 +70,16 @@ func (db *Database) CreateUserTable() error {
 func (db *Database) CreateUserSQL(obj User) error {
 	query := `INSERT INTO `+TABLE_NAME+`(
 		user_id,user_name,password,organization_name,email,auth_token,mobile,note,pin,object_token)`+` VALUES (`
-	obj.User_id+", "
-	obj.Name+", "
-	obj.Password+", "
-	obj.Organization+", "
-	obj.Email+", "
-	obj.Auth_token+", "
-	obj.Mobile+", "
-	obj.Note+", "
-	obj.Pin+", "
-	obj.Object_token+");"
+	string(obj.User_id)+", "
+	string(obj.Name)+", "
+	string(obj.Password)+", "
+	string(obj.Organization)+", "
+	string(obj.Email)+", "
+	string(obj.Auth_token)+", "
+	string(obj.Mobile)+", "
+	string(obj.Note)+", "
+	string(obj.Pin)+", "
+	string(obj.Object_token)+");"
 	Println("")
 	_,err := db.DB.Query(query)
 	return err;
