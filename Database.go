@@ -54,11 +54,11 @@ func (db *Database) CreateUserTable() error {
 		password varchar(100) NOT NULL,
 		organization_name varchar(200),
 		email varchar(200) NOT NULL UNIQUE,
-		auth_token varchar(60) NOT NULL,
+		auth_token varchar(100) NOT NULL,
 		mobile varchar(13),
 		note text,
 		pin varchar(16),
-		object_token varchar(60),
+		object_token varchar(100),
 		PRIMARY KEY (user_id)
 	)`
 	_,err := db.DB.Query(query)
