@@ -54,6 +54,18 @@ func (db *Database )CreateUser(data string ) error {
 	json.Unmarshal([]byte(data),&obj)
 	obj.Auth_token = GenerateToken(60);
 	obj.Object_token = GenerateToken(60);
+
+	if obj.Name == nil {obj.Name=""}
+	if obj.Password == nil {obj.Password=""}
+	if obj.Organization == nil {obj.Organization=""}
+	if obj.Email == nil {obj.Email=""}
+	if obj.Auth_token == nil {obj.Auth_token=""}
+	if obj.Mobile == nil {obj.Mobile=""}
+	if obj.Note == nil {obj.Note=""}
+	if obj.Pin == nil {obj.Pin=""}
+	if obj.Object_token == nil {obj.Object_token=""}
+
+
 	Println("Create user sql function called")
 	err := db.CreateUserSQL(obj);
 	Println("Function calling done")

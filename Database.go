@@ -69,8 +69,7 @@ func (db *Database) CreateUserTable() error {
 
 func (db *Database) CreateUserSQL(obj User) error {
 	query := `INSERT INTO `+TABLE_NAME+`(
-		user_id,user_name,password,organization_name,email,auth_token,mobile,note,pin,object_token)`+` VALUES (`
-	string(obj.User_id)+", "
+		user_name,password,organization_name,email,auth_token,mobile,note,pin,object_token)`+` VALUES (`
 	string(obj.Name)+", "
 	string(obj.Password)+", "
 	string(obj.Organization)+", "
@@ -80,11 +79,12 @@ func (db *Database) CreateUserSQL(obj User) error {
 	string(obj.Note)+", "
 	string(obj.Pin)+", "
 	string(obj.Object_token)+");"
-	Println("")
+
+	Println("Executing Query")
+
 	_,err := db.DB.Query(query)
 	return err;
 }
-
 
 
 
