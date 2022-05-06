@@ -80,7 +80,7 @@ func (db *Database) CreateUserSQL(obj User) error {
 	string(obj.Pin)+", "
 	string(obj.Object_token)+");"
 */
-	query := fmt.Sprintf(`insert into %s ( user_name,password,             organization_name,email,auth_token,mobile,note,pin,object_token) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s")`,obj.Name,obj.Password,obj.Organization,obj.Email,obj.Auth_token,obj.Mobile,obj.Note,obj.Pin,obj.Object_token);
+	query := fmt.Sprintf(`insert into %s ( user_name,password,             organization_name,email,auth_token,mobile,note,pin,object_token) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s")`,TABLE_NAME,obj.Name,obj.Password,obj.Organization,obj.Email,obj.Auth_token,obj.Mobile,obj.Note,obj.Pin,obj.Object_token);
 
 	Println(query)
 	Println("Executing Query")
