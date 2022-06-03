@@ -2,7 +2,7 @@ package login_signup
 
 import (
 	"fmt"
-        "encoding/hex"
+        "encoding/ex"
         "golang.org/x/crypto/bcrypt"
         "math/rand"
 	"encoding/json"
@@ -38,6 +38,10 @@ func CheckEqualPassword(password,hash string) bool {
 	return err==nil;
 }
 
+func EmailValidate(email string) bool {
+    _, err := mail.ParseAddress(email)
+    return err == nil
+}
 
 func GenerateToken(length int) string {
     b := make([]byte, length)
@@ -54,28 +58,16 @@ func (db *Database )CreateUser(data string ) error {
 	json.Unmarshal([]byte(data),&obj)
 	obj.Auth_token = GenerateToken(60);
 	obj.Object_token = GenerateToken(60);
-
-	/*if obj.Name == nil {obj.Name=""}
-	if obj.Password == nil {obj.Password=""}
-	if obj.Organization == nil {obj.Organization=""}
-	if obj.Email == nil {obj.Email=""}
-	if obj.Auth_token == nil {obj.Auth_token=""}
-	if obj.Mobile == nil {obj.Mobile=""}
-	if obj.Note == nil {obj.Note=""}
-	if obj.Pin == nil {obj.Pin=""}
-	if obj.Object_token == nil {obj.Object_token=""}
-*/
-
 	Println("Create user sql function called")
 	err := db.CreateUserSQL(obj);
 	Println("Function calling done")
 	return err
 }
 
-
-
-
-
-
+func (db *Database)CheckUserPresent(data string) (bool,error) {
+	var obj User;
+	json.Unmarshal([]byte(data),&obj)
+	return db.CheckUserPresentSQL(obj)
+}
 
 

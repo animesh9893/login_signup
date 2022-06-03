@@ -68,21 +68,9 @@ func (db *Database) CreateUserTable() error {
 }
 
 func (db *Database) CreateUserSQL(obj User) error {
-	/*query := `INSERT INTO `+TABLE_NAME+`(
-		user_name,password,organization_name,email,auth_token,mobile,note,pin,object_token)`+` VALUES (`
-	string(obj.Name)+", "
-	string(obj.Password)+", "
-	string(obj.Organization)+", "
-	string(obj.Email)+", "
-	string(obj.Auth_token)+", "
-	string(obj.Mobile)+", "
-	string(obj.Note)+", "
-	string(obj.Pin)+", "
-	string(obj.Object_token)+");"
-*/
+
 	query := fmt.Sprintf(`insert into %s ( user_name,password,             organization_name,email,auth_token,mobile,note,pin,object_token) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s")`,TABLE_NAME,obj.Name,obj.Password,obj.Organization,obj.Email,obj.Auth_token,obj.Mobile,obj.Note,obj.Pin,obj.Object_token);
 
-	Println(query)
 	Println("Executing Query")
 
 	_,err := db.DB.Query(query)
@@ -91,6 +79,17 @@ func (db *Database) CreateUserSQL(obj User) error {
 
 
 
+func (db *Database) CheckUserPresent(obj User) (bool,error){
+	query := fmt.Sprintf(`SELECT EXISTS( select id from user where email=="%s" or user_name=="%s" or mobile=="%s";)`,obj.Email,obj.Name,obj.Mobile)
+
+	var exists bool
+
+	row := db.QueryRow()
+	if err := row.Scan(&exists); err != nil {
+		return true,err
+	}
+	return false,err
+}
 
 
 
