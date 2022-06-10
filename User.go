@@ -2,10 +2,11 @@ package login_signup
 
 import (
 	"fmt"
-        "encoding/hex"
-        "golang.org/x/crypto/bcrypt"
-        "math/rand"
+    "encoding/hex"
+    "golang.org/x/crypto/bcrypt"
+    "math/rand"
 	"encoding/json"
+	"net/mail"
 )
 // This structure is used to store user details
 type User struct {
