@@ -85,11 +85,15 @@ func (db *Database) CheckUserPresentSQL(obj User) (bool,error){
 	// var exists bool
 	// var err error
 
-	_,err := db.DB.Query(query)
+	rows,err := db.DB.Query(query)
 	if err!=nil{
 		return false,err
-	}else{
+	}
+
+	if rows.Next() {
 		return true,err
+	}else{
+		return false,err
 	}
 
 	// row := db.DB.QueryRow(query)
