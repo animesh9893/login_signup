@@ -2,7 +2,7 @@ package login_signup
 
 import (
 	"fmt"
-        "encoding/ex"
+        "encoding/hex"
         "golang.org/x/crypto/bcrypt"
         "math/rand"
 	"encoding/json"
