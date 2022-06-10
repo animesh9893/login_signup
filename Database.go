@@ -78,13 +78,13 @@ func (db *Database) CreateUserSQL(obj User) error {
 }
 
 
-
+	
 func (db *Database) CheckUserPresentSQL(obj User) (bool,error){
-	query := fmt.Sprintf(`SELECT EXISTS( select id from user where email=="%s" or user_name=="%s" or mobile=="%s";)`,obj.Email,obj.Name,obj.Mobile)
+	query := fmt.Sprintf(`SELECT user_id from where email='%s' OR user_name='%s' OR mobile='%s';`,obj.Email,obj.Name,obj.Mobile)
 
 	var exists bool
 	var err error
-	
+
 	row := db.DB.QueryRow(query)
 	if err = row.Scan(&exists); err != nil {
 		return true,err
