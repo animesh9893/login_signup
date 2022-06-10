@@ -79,7 +79,7 @@ func (db *Database) CreateUserSQL(obj User) error {
 
 
 
-func (db *Database) CheckUserPresent(obj User) (bool,error){
+func (db *Database) CheckUserPresentSQL(obj User) (bool,error){
 	query := fmt.Sprintf(`SELECT EXISTS( select id from user where email=="%s" or user_name=="%s" or mobile=="%s";)`,obj.Email,obj.Name,obj.Mobile)
 
 	var exists bool
