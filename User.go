@@ -68,6 +68,7 @@ func (db *Database )CreateUser(data string ) error {
 func (db *Database)CheckUserPresent(data string) (bool,error) {
 	var obj User;
 	json.Unmarshal([]byte(data),&obj)
+	Println(obj)
 	return db.CheckUserPresentSQL(obj)
 }
 
